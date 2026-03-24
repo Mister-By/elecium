@@ -3,6 +3,7 @@
 import { useState } from "react"
 import { EyeOff, Mail, MoveLeft } from "lucide-react"
 import HeaderLanding from '@/components/layout/headerLanding'
+import Link from "next/link"
 
 export default function LoginClient() {
 
@@ -218,9 +219,9 @@ export default function LoginClient() {
 
                     <p className="text-center mt-8 text-slate-500 text-sm">
                         Vous n'avez pas de compte ?
-                        <a className="font-bold text-primary ml-1">
+                        <Link href={"/register"} className="font-bold text-primary ml-1">
                             Créer un compte
-                        </a>
+                        </Link >
                     </p>
 
                 </div>

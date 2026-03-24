@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from "react"
 import { useRouter } from "next/navigation"
 import HeaderLanding from '@/components/layout/headerLanding';
 import { ArrowLeft, ArrowRight, Loader, Lock, LockKeyhole, Mail, Shield } from 'lucide-react';
+import Link from "next/link";
 
 export default function RegisterClient({mails})
 {
@@ -339,9 +340,9 @@ return(
 
 <div className="p-8 sm:p-10">
 
-<div className="mb-8">
-
-<h2 className="text-2xl font-bold text-slate-900 mb-2">
+<div className="">
+<span>Vous avez un compte?<Link href={"/login"} className="mb-5 text-primary font-semibold">  connectez vous</Link></span>
+<h2 className="text-2xl mt-3 font-bold text-slate-900 mb-2">
 Créer votre compte
 </h2>
 
@@ -494,9 +495,9 @@ checked={form.terms}
 onChange={handleChange}
 />
 
-<label className="text-sm text-slate-600">
-J'accepte les conditions
-</label>
+<Link href={"#"} className="text-sm text-slate-600">
+J'accepte les <span className="text-blue-500 font-semibold">conditions</span>
+</Link>
 
 </div>
 

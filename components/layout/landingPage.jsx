@@ -1,7 +1,8 @@
 import HeaderLanding from '@/components/layout/headerLanding';
-import { ChartNoAxesColumn, CirclePlus, Earth, FileSearchCorner, HatGlasses, Lock, Plus, Rocket, ShieldCheck, UserRoundPlus, Users } from 'lucide-react';
+import { ChartNoAxesColumn, CheckCircle, CirclePlus, Earth, FileSearchCorner, HatGlasses, Lock, Plus, Rocket, ShieldCheck, UserRoundPlus, Users } from 'lucide-react';
 import droite from "@/public/droite.jpeg";
 import Image from 'next/image';
+import Link from 'next/link';
 
 export default function LandingPage()
 {
@@ -23,18 +24,18 @@ export default function LandingPage()
                                 </p>
         </div>
         <div className="flex justify-center md:justify-baseline flex-wrap gap-4">
-        <button className="flex h-12 min-w-[140px] items-center justify-center rounded-lg bg-[#135bec] px-6 text-base font-bold text-white shadow-md hover:bg-[#135bec]/90 transition-transform hover:scale-[1.02]">
+        <Link href={"/register"} className="flex h-12 min-w-[140px] items-center justify-center rounded-lg bg-[#135bec] px-6 text-base font-bold text-white shadow-md hover:bg-[#135bec]/90 transition-transform hover:scale-[1.02]">
                                     Commencer
-                                </button>
-        <button className="flex h-12 min-w-[140px] items-center justify-center rounded-lg bg-slate-100 px-6 text-base font-bold text-slate-900 hover:bg-slate-200 transition-transform hover:scale-[1.02]">
+                                </Link>
+        <Link href={"/"} className="flex h-12 min-w-[140px] items-center justify-center rounded-lg bg-slate-100 px-6 text-base font-bold text-slate-900 hover:bg-slate-200 transition-transform hover:scale-[1.02]">
                                     En savoir plus
-                                </button>
+                                </Link>
         </div>
         </div>
         <div className="w-full sm:w-1/2 sm:mx-auto">
         <div className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl bg-slate-100 shadow-xl ring-1 ring-slate-900/5">
         <div className="absolute inset-0 bg-cover bg-center" data-alt="Personne africaine votant numériquement" >
-            <Image src={droite} alt='vote' />
+            <Image src={droite} alt='vote' loading='eager' />
         </div>
         <div className="absolute inset-0 bg-gradient-to-tr from-[#135bec]/20 to-transparent mix-blend-multiply"></div>
         </div>
@@ -174,7 +175,7 @@ export default function LandingPage()
         <span className="rounded-full bg-slate-100 px-3 py-1 text-xs font-bold text-slate-600">Démarrage</span>
         </div>
         <div className="flex items-baseline gap-1">
-        <span className="text-4xl font-black text-slate-900">29€</span>
+        <span className="text-4xl font-black text-slate-900">5500 FCFA</span>
         <span className="text-base font-medium text-slate-500">/élection</span>
         </div>
         <p className="text-sm text-slate-500">Parfait pour les comités, clubs et petites équipes.</p>
@@ -182,19 +183,19 @@ export default function LandingPage()
         <hr className="border-slate-100"/>
         <ul className="flex flex-col gap-3">
         <li className="flex items-start gap-3 text-sm text-slate-700">
-        <span className="material-symbols-outlined text-[#135bec] text-[20px]">check</span>
-        <span>Jusqu'à 100 électeurs</span>
+        <CheckCircle className='text-primary'/>
+        <span>Jusqu'à 150 électeurs</span>
         </li>
         <li className="flex items-start gap-3 text-sm text-slate-700">
-        <span className="material-symbols-outlined text-[#135bec] text-[20px]">check</span>
+        <CheckCircle className='text-primary'/>
         <span>Rapport de résultats basique</span>
         </li>
         <li className="flex items-start gap-3 text-sm text-slate-700">
-        <span className="material-symbols-outlined text-[#135bec] text-[20px]">check</span>
+        <CheckCircle className='text-primary'/>
         <span>Support par e-mail</span>
         </li>
         <li className="flex items-start gap-3 text-sm text-slate-700">
-        <span className="material-symbols-outlined text-[#135bec] text-[20px]">check</span>
+        <CheckCircle className='text-primary'/>
         <span>Chiffrement sécurisé</span>
         </li>
         </ul>
@@ -209,7 +210,7 @@ export default function LandingPage()
         <div className="flex flex-col gap-2">
         <h3 className="text-lg font-bold text-[#135bec]">Institution</h3>
         <div className="flex items-baseline gap-1">
-        <span className="text-4xl font-black text-slate-900">199€</span>
+        <span className="text-4xl font-black text-slate-900">12500 FCFA</span>
         <span className="text-base font-medium text-slate-500">/élection</span>
         </div>
         <p className="text-sm text-slate-500">Pour les écoles, universités et PME.</p>
@@ -217,19 +218,19 @@ export default function LandingPage()
         <hr className="border-slate-100"/>
         <ul className="flex flex-col gap-3">
         <li className="flex items-start gap-3 text-sm text-slate-700">
-        <span className="material-symbols-outlined text-[#135bec] text-[20px]">check</span>
-        <span>Jusqu'à 1 000 électeurs</span>
+        <CheckCircle className='text-primary'/>
+        <span>Jusqu'à 1000 électeurs</span>
         </li>
         <li className="flex items-start gap-3 text-sm text-slate-700">
-        <span className="material-symbols-outlined text-[#135bec] text-[20px]">check</span>
+        <CheckCircle className='text-primary'/>
         <span>Analyses avancées &amp; exports</span>
         </li>
         <li className="flex items-start gap-3 text-sm text-slate-700">
-        <span className="material-symbols-outlined text-[#135bec] text-[20px]">check</span>
+        <CheckCircle className='text-primary'/>
         <span>Support e-mail prioritaire</span>
         </li>
         <li className="flex items-start gap-3 text-sm text-slate-700">
-        <span className="material-symbols-outlined text-[#135bec] text-[20px]">check</span>
+        <CheckCircle className='text-primary'/>
         <span>Marque personnalisée</span>
         </li>
         </ul>
@@ -251,19 +252,19 @@ export default function LandingPage()
         <hr className="border-slate-100"/>
         <ul className="flex flex-col gap-3">
         <li className="flex items-start gap-3 text-sm text-slate-700">
-        <span className="material-symbols-outlined text-[#135bec] text-[20px]">check</span>
+        <CheckCircle className='text-primary'/>
         <span>Électeurs illimités</span>
         </li>
         <li className="flex items-start gap-3 text-sm text-slate-700">
-        <span className="material-symbols-outlined text-[#135bec] text-[20px]">check</span>
+        <CheckCircle className='text-primary'/>
         <span>Gestionnaire de compte dédié</span>
         </li>
         <li className="flex items-start gap-3 text-sm text-slate-700">
-        <span className="material-symbols-outlined text-[#135bec] text-[20px]">check</span>
+        <CheckCircle className='text-primary'/>
         <span>Intégrations API personnalisées</span>
         </li>
         <li className="flex items-start gap-3 text-sm text-slate-700">
-        <span className="material-symbols-outlined text-[#135bec] text-[20px]">check</span>
+        <CheckCircle className='text-primary'/>
         <span>SLA &amp; Journaux d'audit</span>
         </li>
         </ul>

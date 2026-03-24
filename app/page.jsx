@@ -7,9 +7,13 @@ export default async function Home() {
   const cookieStore = await cookies();
   const token = await cookieStore.get("token")?.value;
   
+  if(!token)
+  {
+    return <LandingPage/>
+  }
 
   // /dashboard avec middleware auth au milieu
-  const res = await fetch(`${process.env.NEXT_PUBLIC_URL_API}/api`, {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_URL_API}/api/election/all/vote`, {
     headers: {
       Cookie: `token=${token}`
     },
@@ -17,7 +21,13 @@ export default async function Home() {
   });
 
   const data = await res.json();
-  
-  //faire fetch pour recuperer donnée du dashboard
-  return !data.connect ? <LandingPage/> : <DashBoard/>;
+  if(data.connect == false)
+            return <LandingPage />;
+
+        if(data.error == false)
+            return <DashBoard elections={data.elections} />
+        
+        
+        return <DashBoard elections={data.elections} />
+
 }

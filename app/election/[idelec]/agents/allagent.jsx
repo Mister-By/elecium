@@ -112,64 +112,56 @@ export default function AllAgent({ u })
                     const initials = `${user.nom[0] || ""}${user.prenom[0] || ""}`;
 
                     return (
-                        <div
-                            key={user.iduser}
-                            className="flex items-center justify-between w-full bg-white border rounded-full px-6 py-4 shadow-sm hover:shadow-md transition"
-                        >
+                       <div
+  key={user.iduser}
+  className="bg-white border border-gray-200 rounded-2xl shadow-sm hover:shadow-lg transition-transform transform hover:-translate-y-1 hover:scale-[1.01] duration-300 w-full max-w-lg mx-auto p-6 flex flex-col sm:flex-row items-center gap-4"
+>
+  {/* LEFT: Avatar + Infos */}
+  <div className="flex items-center gap-4 flex-1 w-full sm:w-auto">
+    <div className="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 font-bold text-lg">
+      {initials.toUpperCase()}
+    </div>
+    <div className="flex flex-col">
+      <span className="text-slate-900 font-semibold text-md sm:text-lg">
+        {user.nom} {user.prenom}
+      </span>
+      <span className="text-slate-500 text-sm sm:text-base">
+        {user.mail}
+      </span>
+    </div>
+  </div>
 
-                            {/* LEFT */}
-                            <div className="flex items-center gap-6 flex-1">
+  {/* RIGHT: Status + Actions */}
+  
+    {/* STATUS */}
+    <span
+      className={` px-3 py-1 rounded-full text-xs font-semibold ${
+        user.agent
+          ? "bg-green-100 text-green-600"
+          : "bg-gray-100 text-gray-500"
+      }`}
+    >
+      {user.agent ? "Agent" : "Utilisateur"}
+    </span>
 
-                                <div className="size-12 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 font-bold">
-                                    {initials.toUpperCase()}
-                                </div>
+    {/* ACTION */}
+    {user.agent ? (
+      <button
+        onClick={() => handleRemove(user)}
+        className="px-5 py-2 rounded-xl bg-red-100 text-red-600 font-semibold hover:bg-red-600 hover:text-white transition-colors duration-300"
+      >
+        Supprimer
+      </button>
+    ) : (
+      <button
+        onClick={() => handleAdd(user)}
+        className="px-5 py-2 rounded-xl bg-blue-100 text-blue-600 font-semibold hover:bg-blue-600 hover:text-white transition-colors duration-300"
+      >
+        Ajouter
+      </button>
+    )}
+  </div>
 
-                                <div className="flex flex-col">
-                                    <span className="text-slate-900 font-bold">
-                                        {user.nom} {user.prenom}
-                                    </span>
-                                    <span className="text-slate-500 text-xs">
-                                        {user.mail}
-                                    </span>
-                                </div>
-
-                            </div>
-
-                            {/* STATUS */}
-                            <div className="hidden md:flex flex-1">
-                                {user.agent ? (
-                                    <span className="px-3 py-1 rounded-full text-xs font-bold bg-green-100 text-green-600">
-                                        Agent
-                                    </span>
-                                ) : (
-                                    <span className="px-3 py-1 rounded-full text-xs font-bold bg-slate-100 text-slate-500">
-                                        Utilisateur
-                                    </span>
-                                )}
-                            </div>
-
-                            {/* ACTION */}
-                            <div className="flex items-center gap-3">
-
-                                {user.agent ? (
-                                    <button
-                                        onClick={()=>handleRemove(user)}
-                                        className="px-5 py-2 rounded-full bg-red-100 text-red-600 font-bold hover:bg-red-600 hover:text-white transition"
-                                    >
-                                        Supprimer
-                                    </button>
-                                ) : (
-                                    <button
-                                        onClick={()=>handleAdd(user)}
-                                        className="px-5 py-2 rounded-full bg-blue-100 text-blue-600 font-bold hover:bg-blue-600 hover:text-white transition"
-                                    >
-                                        Ajouter
-                                    </button>
-                                )}
-
-                            </div>
-
-                        </div>
                     );
                 })}
 

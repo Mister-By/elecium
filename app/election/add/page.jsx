@@ -117,9 +117,9 @@ export default async function  AddElect() {
             </div>
 
             <div className="flex justify-center mt-8">
-            <button className="flex min-w-[120px] cursor-pointer items-center justify-center rounded-lg h-10 px-6 bg-white border border-slate-300 text-slate-700 text-sm font-bold shadow-sm hover:bg-slate-50 transition-colors">
+            <Link href={"/"}  className="flex min-w-[120px] cursor-pointer items-center justify-center rounded-lg h-10 px-6 bg-white border border-slate-300 text-slate-700 text-sm font-bold shadow-sm hover:bg-slate-50 transition-colors">
                 Annuler
-            </button>
+            </Link >
             </div>
 
         </div>

@@ -132,7 +132,7 @@ Retour au tableau de bord
 
 <div className="flex">
 
-    {data.status === "Planifié" && (<Link href={`/election/${data.idelec}/modif/`} className="mt-2 w-30 shadow-black cursor-pointer flex gap-1 px-2 py-2 border rounded-2xl">
+    {data.valid == 0  && (<Link href={`/election/${data.idelec}/modif/`} className="mt-2 w-30 shadow-black cursor-pointer flex gap-1 px-2 py-2 border rounded-2xl">
         <span>Modifier</span>
         <Pencil/>
     </Link>)}
@@ -167,7 +167,7 @@ Retour au tableau de bord
 {data.createur ? "Créateur" : "Agent"}
 </span>
 
-{data.createur && !data.valid && data.status=="Planifié" && <button
+{data.createur && !data.valid  && <button
 className={`px-1 py-2.5 font-bold rounded-lg shadow-md transition-colors flex items-center justify-center gap-2 border-primary 
     bg-green-200 text-green-600 text-xs bg-green hover:bg-green-100 from-primary via-white to-primary
 `}
@@ -237,7 +237,7 @@ Gérer les agents
 
 
 
-<Link href={`/election/${idelec}/`} className="flex items-center gap-4 p-4 rounded-xl bg-white border border-slate-200 hover:border-primary hover:shadow-md transition-all group">
+<Link href={`/election/${idelec}/enrolements`} className="flex items-center gap-4 p-4 rounded-xl bg-white border border-slate-200 hover:border-primary hover:shadow-md transition-all group">
 
 <div className="rounded-full bg-blue-50 p-3 group-hover:bg-primary group-hover:text-white transition-colors text-primary">
 

@@ -18,6 +18,7 @@ export default async function AllElection()
         });
 
         const data = await res.json();
+        console.log(data);
         
 
         if(data.connect && data.connect == false)

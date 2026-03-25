@@ -130,6 +130,7 @@ className={`cursor-pointer group relative bg-white rounded-xl overflow-hidden sh
 <span className={`inline-flex items-center px-2 py-0.5 rounded-full text-xs font-bold uppercase tracking-wider
 ${e.createur ? "bg-primary/10 text-primary" : "bg-slate-100 text-slate-600"}`}>
 {e.createur ? "Créateur" : "Agent"}
+{console.log("crea: ",e.createur)}
 </span>
 
 

@@ -132,7 +132,7 @@ Retour au tableau de bord
 
 <div className="flex">
 
-    {data.valid == 0  && (<Link href={`/election/${data.idelec}/modif/`} className="mt-2 w-30 shadow-black cursor-pointer flex gap-1 px-2 py-2 border rounded-2xl">
+    {data.valid == 0 && data.createur  && (<Link href={`/election/${data.idelec}/modif/`} className="mt-2 w-30 shadow-black cursor-pointer flex gap-1 px-2 py-2 border rounded-2xl">
         <span>Modifier</span>
         <Pencil/>
     </Link>)}

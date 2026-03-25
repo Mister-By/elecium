@@ -74,11 +74,11 @@ return (
 
 <div>
 <h1 className="text-3xl font-black text-slate-900 tracking-tight">
-Tableau de Bord
+Mes Invitations Electorales
 </h1>
 
 <p className="text-slate-500 mt-1">
-Gérez et surveillez vos scrutins électroniques sécurisés.
+Ici {filtered.length == 0 ? "seront":"sont"} affichés les scrutins auquels vous êtes convié
 </p>
 </div>
 

@@ -98,7 +98,7 @@ export default function Enrole({ u, ia })
     try
     {
       const res = await fetch(
-        `${process.env.NEXT_PUBLIC_URL_API}/api/enroll/online/${user.iduser}`,
+        `${process.env.NEXT_PUBLIC_URL_API}/api/enroll/online/${user.iduser}/${idelec}`,
         {
           method: "DELETE",
           credentials: "include"
@@ -142,6 +142,20 @@ export default function Enrole({ u, ia })
     {
       enroll(user);
     }
+  }
+
+  async function whoEnrol(iduser) 
+  {
+      const rep = await fetch(`${process.env.NEXT_PUBLIC_URL_API}/api/election/${iduser}/${idelec}`,{
+        credentials: "include"
+      });
+      const data = await rep.json();
+      console.log(data.message);
+      
+      if(!data.error)
+      {
+        confirm(data.message);
+      }
   }
 
   // =========================
@@ -280,6 +294,10 @@ export default function Enrole({ u, ia })
                       <div>
                         {user.nom} {user.prenom}
                       </div>
+
+                      {user.enrole &&<div className="text-blue-600 text-sm font-semibold" onClick={()=> whoEnrol(user.iduser)}>
+                        Qui a enrolé ?
+                      </div>}
 
                       <div className="flex gap-2">
                         {console.log(user.enrole, user.nom)}

@@ -4,6 +4,7 @@ import { CheckCircle, Lightbulb } from "lucide-react";
 import OnlineClient from './onlineClient';
 import { handleConnect } from "../../../../lib/handleConnect";
 import LoginClient from "../../../login/login";
+import Header from "@/components/layout/header";
 
 export default async function online() {
     
@@ -16,11 +17,12 @@ export default async function online() {
 
   return (
     <div>
-      <main className="flex-1 w-full max-w-[960px] mx-auto px-4 sm:px-6 lg:px-8 py-10">
+      <Header/>
+      <main className=" mt-23 flex-1 w-full max-w-[960px] mx-auto px-4 sm:px-6 lg:px-8 py-10">
         <div className="mb-10">
           <div className="flex flex-col gap-3">
             <h1 className="text-slate-900 text-3xl font-black leading-tight tracking-[-0.033em]">
-              Créer une Nouvelle Élection En Ligne
+              Créer une Nouvelle Élection 
             </h1>
             <p className="text-slate-500 text-lg font-normal leading-normal">
               Configurez votre scrutin sécurisé avec les dernières technologies de vérification.

@@ -12,6 +12,7 @@ Pencil,
 Plus,
 Sparkles
 } from "lucide-react";
+import Link from "next/link";
 
 export default function AllElectionClient({ elections })
 {
@@ -72,9 +73,9 @@ return (
 <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
 
 <div>
-<h1 className="text-3xl font-black text-slate-900 tracking-tight">
+<Link href={`/election`} className="text-3xl font-black text-slate-900 tracking-tight">
 Tableau de Bord
-</h1>
+</Link>
 
 <p className="text-slate-500 mt-1">
 Gérez et surveillez vos scrutins électroniques sécurisés.
@@ -150,11 +151,11 @@ ${e.ia
 </div>
 
 <h3 className="text-lg font-bold text-slate-900 leading-tight mb-3 group-hover:text-primary transition-colors">
-{e.lib}
+{e.lib} ({e.type})
 
 </h3>
 
-{!e.valid && e.status !== "Terminée" && (
+{e.valid == false && e.status !== "Terminée" && (
     <span className={` inline-flex items-center px-1 py-0.5 text-red-600 rounded-full text-[9px] font-bold uppercase tracking-wider
      bg-red-100 "}`}>
         {(!e.createur)? "Liste electoral pas encore validé par le createur" : "Vous n'avez pas encore valider la liste electoral"}

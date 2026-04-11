@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import * as faceapi from "face-api.js";
+import VoteClient from "./voteclient";
 
 const INSTRUCTION_DUREE = 6000;
 const NB_INSTRUCTIONS   = 3;
@@ -28,10 +29,11 @@ const LABELS = {
   OUVRIR_BOUCHE:    "Ouvrez la bouche",
 };
 
-export default function DetectionVivacite({ onSuccess, onFailure }) {
+export default function Vivacite({ onSuccess, onFailure, election }) {
+    const streamRef = useRef(null);
   const videoRef  = useRef(null);
   const canvasRef = useRef(null);
-
+const [formDataState, setFormDataState] = useState(null);
   const [phase, setPhase]               = useState("init");
   const [message, setMessage]           = useState("Chargement des modèles...");
   const [progression, setProgression]   = useState(0);
@@ -86,19 +88,19 @@ export default function DetectionVivacite({ onSuccess, onFailure }) {
       try {
         const formData = new FormData();
         formData.append("photo", blob, "vivacite.png");
+        setFormDataState(formData);
+        // const res = await fetch(
+        //   `${process.env.NEXT_PUBLIC_URL_API}/api/compare`,
+        //   { method: "POST", body: formData }
+        // );
 
-        const res = await fetch(
-          `${process.env.NEXT_PUBLIC_URL_API}/api/compare`,
-          { method: "POST", body: formData }
-        );
-
-        if (res.ok) {
-          setEnvoi("ok");
-          if (onSuccess) onSuccess();
-        } else {
-          setEnvoi("erreur");
-          if (onFailure) onFailure();
-        }
+        // if (res.ok) {
+        //   setEnvoi("ok");
+        //   if (onSuccess) onSuccess();
+        // } else {
+        //   setEnvoi("erreur");
+        //   if (onFailure) onFailure();
+        // }
       } catch (e) {
         console.error("Erreur envoi photo:", e);
         setEnvoi("erreur");
@@ -106,16 +108,18 @@ export default function DetectionVivacite({ onSuccess, onFailure }) {
       }
     }, "image/png");
   }
+  
 
   // ─── Init ─────────────────────────────────────────────────────────────────
   useEffect(() => {
     demarrer();
     return () => {
-      clearInterval(intervalDetRef.current);
-      clearTimeout(timerRef.current);
-      clearInterval(countdownRef.current);
-      if (typeof window !== "undefined") window.speechSynthesis?.cancel();
-    };
+  clearInterval(intervalDetRef.current);
+  clearTimeout(timerRef.current);
+  clearInterval(countdownRef.current);
+  stopCamera();
+  window.speechSynthesis?.cancel();
+};
   }, []);
 
   async function demarrer() {
@@ -128,8 +132,11 @@ export default function DetectionVivacite({ onSuccess, onFailure }) {
 
       const stream = await navigator.mediaDevices.getUserMedia({
         video: { width: 640, height: 480, facingMode: "user" },
-      });
-      videoRef.current.srcObject = stream;
+        });
+
+        streamRef.current = stream; // 🔥 important
+        videoRef.current.srcObject = stream;
+
       videoRef.current.onloadedmetadata = () => {
         videoRef.current.play();
         attendreVisage();
@@ -138,6 +145,18 @@ export default function DetectionVivacite({ onSuccess, onFailure }) {
       setMessage("❌ Erreur caméra : " + e.message);
     }
   }
+
+function stopCamera() {
+  if (streamRef.current) {
+    streamRef.current.getTracks().forEach(track => track.stop());
+    streamRef.current = null;
+  }
+
+  
+  if (videoRef.current) {
+    videoRef.current.srcObject = null;
+  }
+}
 
   async function attendreVisage() {
     setPhaseSync("init");
@@ -320,26 +339,36 @@ export default function DetectionVivacite({ onSuccess, onFailure }) {
     setTimeout(prochaineInstruction, 800);
   }
 
-  function terminer(reussi) {
-    clearInterval(intervalDetRef.current);
-    clearTimeout(timerRef.current);
-    clearInterval(countdownRef.current);
+async function terminer(reussi) {
+  clearInterval(intervalDetRef.current);
+  clearTimeout(timerRef.current);
+  clearInterval(countdownRef.current);
 
-    if (reussi) {
-      setPhaseSync("succes");
-      setInstructionSync("");
-      setMessage("🎉 Vivacité confirmée !");
-      lire("Vivacité confirmée");
-      // Capturer et envoyer immédiatement
-      capturerEtEnvoyer();
-    } else {
-      setPhaseSync("echec");
-      setInstructionSync("");
-      setMessage("❌ Échec — veuillez réessayer");
-      lire("Échec, veuillez réessayer");
-      if (onFailure) onFailure();
-    }
+  if (reussi) {
+    setPhaseSync("succes");
+    setInstructionSync("");
+    setMessage("🎉 Vivacité confirmée !");
+    lire("Vivacité confirmée");
+    lire("Stabiliser vous ")
+    setTimeout(()=>{
+      
+    },2000);
+    setTimeout(async()=>{
+    await capturerEtEnvoyer();
+    stopCamera();
+    },2000);
+
+  } else {
+    stopCamera();
+
+    setPhaseSync("echec");
+    setInstructionSync("");
+    setMessage("❌ Échec — veuillez réessayer");
+    lire("Échec, veuillez réessayer");
+
+    if (onFailure) onFailure();
   }
+}
 
   function rollAngle(jaw) {
     const p1 = jaw[0], p2 = jaw[16];
@@ -378,6 +407,12 @@ export default function DetectionVivacite({ onSuccess, onFailure }) {
     succes:      "#2e7d32",
     echec:       "#c62828",
   }[phase] ?? "#888";
+
+  if (formDataState) {
+  return (
+    <VoteClient formData={formDataState} election={election} />
+  );
+}
 
   return (
     <div style={{ textAlign: "center", fontFamily: "sans-serif", padding: 20 }}>

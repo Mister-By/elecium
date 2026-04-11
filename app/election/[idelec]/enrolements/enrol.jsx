@@ -56,6 +56,11 @@ export default function Enrole({ u, ia })
       if (ia && blob)
         formData.append("photo", blob, "img.png");
 
+      if(user.type=="physique")
+      {
+        alert("La enrolement physique se font pas ici");
+        return
+      }
       const res = await fetch(
         `${process.env.NEXT_PUBLIC_URL_API}/api/enroll/online/${user.iduser}`,
         {
@@ -104,6 +109,7 @@ export default function Enrole({ u, ia })
           credentials: "include"
         }
       );
+  
 
       const data = await res.json();
       setMessage(data.message);
@@ -292,7 +298,7 @@ export default function Enrole({ u, ia })
                     <div key={user.iduser} className="flex justify-between items-center bg-white p-4 rounded-xl shadow">
 
                       <div>
-                        {user.nom} {user.prenom}
+                        {user.nom} {user.prenom} ({user.type})
                       </div>
 
                       {user.enrole &&<div className="text-blue-600 text-sm font-semibold" onClick={()=> whoEnrol(user.iduser)}>
@@ -309,14 +315,17 @@ export default function Enrole({ u, ia })
                           >
                             Retirer
                           </button>
-                        ) : (
+                        ) : (user.type !=="physique")? (
                           <button
                             onClick={() => handleAdd(user)}
                             className="px-4 py-2 bg-blue-500 font-semibold font-sans text-white rounded"
                           >
                             Ajouter
                           </button>
-                        )}
+                        ): <span className="px-4 py-2 bg-slate-800/30 font-semibold font-sans text-white rounded">
+                              Sur Dispositif Physique
+                          </span>
+                        }
                       </div>
 
                     </div>

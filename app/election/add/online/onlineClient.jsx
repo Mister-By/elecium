@@ -3,12 +3,15 @@
 import { useState } from "react";
 import { Plus, Trash, User } from "lucide-react";
 
+
 export default function onlineClient() {
 
   const [data, setData] = useState({
     lib: "",
     desc: "",
     ia: false,
+    type: "l",
+    urnes: [],
     dd: "",
     df: "",
     candidats: [
@@ -53,6 +56,24 @@ export default function onlineClient() {
     setData({ ...data, candidats });
   }
 
+  function addUrne() {
+  setData(prev => ({
+    ...prev,
+    urnes: [...prev.urnes, { position: "" }]
+  }));
+}
+
+function updateUrne(index, value) {
+  const urnes = [...data.urnes];
+  urnes[index].position = value;
+  setData({ ...data, urnes });
+}
+
+function removeUrne(index) {
+  const urnes = data.urnes.filter((_, i) => i !== index);
+  setData({ ...data, urnes });
+}
+
   async function getPayload() {
 
   const formData = new FormData();
@@ -62,6 +83,11 @@ export default function onlineClient() {
   formData.append("ia", data.ia);
   formData.append("dd", data.dd);
   formData.append("df", data.df);
+  formData.append("type", data.type);
+
+  if (data.type === "p" || data.type === "h") {
+  formData.append("urnes", JSON.stringify(data.urnes));
+}
 
   data.candidats.forEach((c, i) => {
 
@@ -75,21 +101,23 @@ export default function onlineClient() {
   });
 
   console.log([...formData.entries()]);
-  const rep = await fetch(`${process.env.NEXT_PUBLIC_URL_API}/api/election/all`,
+  const rep = await fetch(`${process.env.NEXT_PUBLIC_URL_API}/api/election/add/online`,
     {
-    //     method: "POST",
-    //     body: formData,
+        method: "POST",
+        body: formData,
         credentials: "include",
         
     }
   );
   const dat = await rep.json();
   console.log(dat);
+  window.location.href = `/election`
   
   return formData;
 }
 
   return (
+    
     <div className="lg:col-span-8 space-y-8">
 
       {/* SECTION 1 */}
@@ -100,6 +128,22 @@ export default function onlineClient() {
         </div>
 
         <div className="space-y-6">
+
+          <label className="block">
+  <span className="text-slate-900 text-base font-medium mb-2 block">
+    Type d'élection
+  </span>
+
+  <select
+    className="w-full h-12 px-4 rounded-lg border-slate-300 bg-slate-50"
+    value={data.type}
+    onChange={(e) => updateField("type", e.target.value)}
+  >
+    <option value="l">En ligne</option>
+    <option value="p">Physique</option>
+    <option value="h">Hybride</option>
+  </select>
+</label>
 
           <label className="block">
             <span className="text-slate-900 text-base font-medium mb-2 block">
@@ -124,7 +168,7 @@ export default function onlineClient() {
             />
           </label>
 
-          <div className="pt-2">
+          {data.type !== "p" && (<div className="pt-2">
             <label className="inline-flex items-center gap-3 cursor-pointer">
               <input
                 className="form-checkbox w-6 h-6 rounded border-slate-300 text-primary"
@@ -142,7 +186,7 @@ export default function onlineClient() {
                 </span>
               </div>
             </label>
-          </div>
+          </div>)}
 
         </div>
       </div>
@@ -211,24 +255,30 @@ export default function onlineClient() {
     <div className="flex flex-col items-center gap-2">
       <label className="cursor-pointer">
         <div className="size-16 rounded-lg bg-slate-200 flex items-center justify-center overflow-hidden">
-          <User className="text-slate-400"/>
+          {!c.preview && (<User className="text-slate-400"/>)}
+          {c.preview && (
+            <img src={c.preview} alt={c.lib} />
+          )}
         </div>
 
         <input
           type="file"
           accept="image/*"
           className="hidden"
+          onChange={(e)=> handlePhoto(i, e.target.files[0])}
         />
       </label>
     </div>
 
     {/* LIBELLE */}
     <div className="flex-1">
-      <input
-        className="form-input flex w-full rounded-lg border-slate-300 bg-white text-slate-900 focus:border-primary focus:ring-primary h-12 px-4 placeholder:text-slate-400"
-        placeholder="Nom du candidat"
-        type="text"
-      />
+<input
+  className="form-input flex w-full rounded-lg border-slate-300 bg-white text-slate-900 focus:border-primary focus:ring-primary h-12 px-4 placeholder:text-slate-400"
+  placeholder="Nom du candidat"
+  type="text"
+  value={c.lib} // ✅ important
+  onChange={(e) => updateCandidate(i, "lib", e.target.value)} // ✅ important
+/>
     </div>
 
     {/* DELETE */}
@@ -244,9 +294,11 @@ export default function onlineClient() {
 
   {/* DESCRIPTION */}
   <textarea
-    className="form-textarea flex w-full rounded-lg border-slate-300 bg-white text-slate-900 focus:border-primary focus:ring-primary min-h-[80px] px-4 py-3 placeholder:text-slate-400"
-    placeholder="Description du candidat..."
-  ></textarea>
+  className="form-textarea flex w-full rounded-lg border-slate-300 bg-white text-slate-900 focus:border-primary focus:ring-primary min-h-[80px] px-4 py-3 placeholder:text-slate-400"
+  placeholder="Description du candidat..."
+  value={c.desc} // ✅ important
+  onChange={(e) => updateCandidate(i, "desc", e.target.value)} // ✅ important
+/>
 
 </div>
 
@@ -269,12 +321,64 @@ export default function onlineClient() {
         </div>
 
       </div>
+          {(data.type === "p" || data.type === "h") && (
 
+  <div className="bg-white rounded-xl p-6 shadow-sm border border-slate-200">
+
+    <div className="flex items-center justify-between mb-6">
+      <div className="flex items-center gap-3">
+        <span className="flex items-center justify-center size-8 rounded-full bg-primary/10 text-primary font-bold">4</span>
+        <h3 className="text-xl font-bold text-slate-900">Urnes</h3>
+      </div>
+
+      <span className="text-sm text-slate-500">
+        Optionnel
+      </span>
+    </div>
+
+    <div className="space-y-3">
+
+      {data.urnes.map((u, i) => (
+        <div key={i} className="flex gap-3 items-center">
+
+          <input
+            className="flex-1 h-12 px-4 border rounded-lg bg-slate-50"
+            placeholder="Position de l'urne (ex: Salle A)"
+            value={u.position}
+            onChange={(e) => updateUrne(i, e.target.value)}
+          />
+
+          <button
+            type="button"
+            onClick={() => removeUrne(i)}
+            className="text-red-500"
+          >
+            <Trash />
+          </button>
+
+        </div>
+      ))}
+
+      <div className="flex justify-end">
+        <button
+          type="button"
+          onClick={addUrne}
+          className="h-12 w-12 flex items-center justify-center bg-primary/10 text-primary rounded-lg"
+        >
+          <Plus />
+        </button>
+      </div>
+
+    </div>
+
+  </div>
+
+)}
       <button
         onClick={getPayload}
         className="bg-primary text-white px-6 py-3 rounded-lg"
       >
-        Tester objet final
+        Créer
       </button>
 
     </div>

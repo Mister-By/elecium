@@ -22,26 +22,7 @@ export default function HeaderLanding() {
 
       {/* Navigation desktop */}
       <div className="hidden md:flex flex-1 justify-end gap-8 items-center">
-        <nav className="flex gap-6" aria-label="Navigation principale">
-          <a
-            className="text-sm font-medium text-slate-600 hover:text-[#135bec] transition-colors"
-            href="#features"
-          >
-            Fonctionnalités
-          </a>
-          <a
-            className="text-sm font-medium text-slate-600 hover:text-[#135bec] transition-colors"
-            href="#pricing"
-          >
-            Tarifs
-          </a>
-          <a
-            className="text-sm font-medium text-slate-600 hover:text-[#135bec] transition-colors"
-            href="#support"
-          >
-            Support
-          </a>
-        </nav>
+        
         <div className="flex gap-3">
           <a
             className="flex h-10 items-center justify-center rounded-lg px-4 text-sm font-bold text-slate-700 hover:bg-slate-100 transition-colors"

@@ -15,7 +15,8 @@ Sparkles
 import Link from "next/link";
 
 export default function AllElectionClient({ elections })
-{
+{console.log(elections);
+
 
 const [filter, setFilter] = useState("Toutes");
 
@@ -114,7 +115,7 @@ return (
 
 <div
 key={e.idelec}
-onClick={()=>{ `${e.valid? window.location.href=`/election/vote/${e.idelec}`:null } `}}
+onClick={()=>{ `${e.valid? window.location.href=`/vote/${e.idelec}`:null } `}}
 className={`cursor-pointer group relative bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all border-l-4 ${style.border}`}
 >
 
@@ -150,7 +151,7 @@ ${e.ia
 
 </h3>
 
-{!e.valid && e.status !== "Terminée" && (
+{e.valid == false && e.status !== "Terminée" && (
     <span className={` inline-flex items-center px-1 py-0.5 text-red-600 rounded-full text-[9px] font-bold uppercase tracking-wider
      bg-red-100 "}`}>
         {(!e.createur)? "Liste electoral pas encore validé par le createur" : "Vous n'avez pas encore valider la liste electoral"}
@@ -238,7 +239,7 @@ e.createur
 
 
 <div className="fixed bottom-8 right-8 z-50">
-<Link href={`/election/add`} className="group relative flex items-center justify-center size-14 bg-primary text-white rounded-full shadow-lg shadow-primary/40 hover:bg-blue-600 hover:scale-105 transition-all duration-300">
+<Link href={`/election/add/online`} className="group relative flex items-center justify-center size-14 bg-primary text-white rounded-full shadow-lg shadow-primary/40 hover:bg-blue-600 hover:scale-105 transition-all duration-300">
 
 <Plus/>
 

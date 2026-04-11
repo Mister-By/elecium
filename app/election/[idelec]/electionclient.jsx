@@ -15,22 +15,45 @@ UserPlus,
 Pencil,
 Trash,
 X,
-ListCheck
+ListCheck,
+VoteIcon
 } from "lucide-react";
 import Link from "next/link";
 import { useParams } from "next/navigation";
+import { io } from "socket.io-client";
 
 export default function ElectionClient({ data })
 {
+    console.log(data);
+    const [nbr_votant, setN] = useState(data.nbr_votant);  
+    const [valid, setVal] = useState(data.valid);
+    const [nbr_vote, setNv] = useState(data.nbr_vote);
+     
     const {idelec} = useParams();
     const [message, setMessage] = useState(null);
+    const socket = io(`${process.env.NEXT_PUBLIC_URL_API}`,{
+        auth: {
+            iduser: data.iduser
+        }
+    });
+    socket.on("addUser",()=>{ setN(nbr_votant + 1) });
+    socket.on("delUser",()=>{ setN(nbr_votant - 1)});
+    socket.on("valider",()=>{ setVal(1) });
+    socket.on("vote",()=>{ setNv(nbr_vote + 1) });
 useEffect(() => {
+    socket.on("connect",()=>console.log("connecté"));
+    
     const msg = localStorage.getItem("message");
     if(msg)
     {
         setMessage(msg);
         localStorage.removeItem("message");
     }
+
+    return ()=>{
+        socket.disconnect();
+    }
+
 }, []);
 const [timeLeft,setTimeLeft] = useState("");
 const [progress,setProgress] = useState(0);
@@ -85,7 +108,30 @@ return ()=>clearInterval(interval);
 
 },[data]);
 
-
+async function handleValidate() 
+{
+    if(confirm("Voulez vous valider la liste Electorale ?"))
+    {
+        const rep = await fetch(`${process.env.NEXT_PUBLIC_URL_API}/api/election/validerList/${idelec}`,{
+            method: "POST",
+            credentials: "include",
+            headers:{
+                "content-type": "application/json"
+            }
+        });
+        const data = await rep.json();
+        if(data.error==true)
+        {
+            alert(data.message);
+            return;
+        }
+        else
+        {
+            setMessage(data.message);
+            return;
+        }
+    }    
+}
 
 const participation =
 data.nbr_votant === 0
@@ -112,32 +158,34 @@ return(
 
 <div className="mb-8">
 
-<a className="inline-flex items-center text-slate-500 hover:text-primary mb-4 transition-colors">
+<Link href={`/election/`}  className="inline-flex items-center text-slate-500 hover:text-primary mb-4 transition-colors">
 
 <ArrowLeft size={20} className="mr-1"/>
 
-<span className="text-sm font-medium">
+<div className="text-sm font-medium">
 Retour au tableau de bord
-</span>
+</div >
 
-</a>
+</Link>
 
 <div className="flex flex-col md:flex-row md:items-start justify-between gap-4">
 
 <div className="max-w-2xl">
 
+
+
 <h1 className="text-slate-900 text-3xl md:text-4xl font-black leading-tight">
-{data.lib} 
+{data.lib} ({data.type })
 </h1>
 
 <div className="flex">
 
-    {data.valid == 0 && data.createur  && (<Link href={`/election/${data.idelec}/modif/`} className="mt-2 w-30 shadow-black cursor-pointer flex gap-1 px-2 py-2 border rounded-2xl">
+    {data.valid == 0 && data.createur  && (<Link href={`/election/${data.idelec}/modif/`} className="mt-2 w-30 shadow-black shadow-md text-primary  cursor-pointer flex gap-1 px-2 py-2 border-2 rounded-2xl">
         <span>Modifier</span>
         <Pencil/>
     </Link>)}
 
-    {["Planifié", "Terminée"].includes(data.status) &&(<Link href={""} className="mt-2 ml-4 w-30 shadow-black cursor-pointer flex gap-1 px-2 py-2 border rounded-2xl">
+    {["Planifié", "Terminée"].includes(data.status) &&(<Link href={""} className="mt-2 ml-4 w-30 shadow-black shadow-md text-red-300 cursor-pointer flex gap-1 px-2 py-2 border rounded-2xl">
         <span>Supprimer</span>
         <Trash/>
     </Link>)}
@@ -167,10 +215,11 @@ Retour au tableau de bord
 {data.createur ? "Créateur" : "Agent"}
 </span>
 
-{data.createur && !data.valid  && <button
+{data.createur && !valid  && <button
 className={`px-1 py-2.5 font-bold rounded-lg shadow-md transition-colors flex items-center justify-center gap-2 border-primary 
     bg-green-200 text-green-600 text-xs bg-green hover:bg-green-100 from-primary via-white to-primary
 `}
+onClick={handleValidate}
 >
 <span>Valider liste electoral</span>
 </button>}
@@ -237,7 +286,7 @@ Gérer les agents
 
 
 
-<Link href={`/election/${idelec}/enrolements`} className="flex items-center gap-4 p-4 rounded-xl bg-white border border-slate-200 hover:border-primary hover:shadow-md transition-all group">
+{data.type !== "Physique" &&(<Link href={`/election/${idelec}/enrolements`} className="flex items-center gap-4 p-4 rounded-xl bg-white border border-slate-200 hover:border-primary hover:shadow-md transition-all group">
 
 <div className="rounded-full bg-blue-50 p-3 group-hover:bg-primary group-hover:text-white transition-colors text-primary">
 
@@ -249,7 +298,7 @@ Gérer les agents
 Enrôler
 </span>
 
-</Link >
+</Link >)}
 
 <Link href={`/election/${idelec}/`} className="flex items-center gap-4 p-4 rounded-xl bg-white border border-slate-200 hover:border-primary hover:shadow-md transition-all group">
 
@@ -264,6 +313,20 @@ Liste Electoral
 </span>
 
 </Link >
+
+{["Hybride", "Physique"].includes(data.type) && (<Link href={`/election/${idelec}/urnes/`} className="flex items-center gap-4 p-4 rounded-xl bg-white border border-slate-200 hover:border-primary hover:shadow-md transition-all group">
+
+<div className="rounded-full bg-blue-50 p-3 group-hover:bg-primary group-hover:text-white transition-colors text-primary">
+
+<VoteIcon size={24}/>
+
+</div>
+
+<span className="text-slate-900 font-bold">
+    Gérer Les Urnes
+</span>
+
+</Link >)}
 
 </div>
 
@@ -287,7 +350,7 @@ Total Électeurs
 </div>
 
 <p className="text-slate-900 text-2xl font-bold">
-{data.nbr_votant}
+{nbr_votant}
 </p>
 
 </div>
@@ -307,7 +370,7 @@ Votes Exprimés
 </div>
 
 <p className="text-slate-900 text-2xl font-bold">
-{data.nbr_vote}
+{nbr_vote}
 </p>
 
 <div className="w-full bg-slate-100 rounded-full h-1.5 mt-2">

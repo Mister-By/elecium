@@ -5,9 +5,9 @@ import { ArrowLeft, User, Pencil, Trash, Plus, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 
-export default function AllCandid({ c })
+export default function AllUrne({ u })
 {
-    const [ca, setCa] = useState(c);
+    const [urne, setUrne] = useState(u);
     const {idelec} = useParams()
     const [m, setM] = useState(null);
     useEffect(()=>{
@@ -19,18 +19,19 @@ export default function AllCandid({ c })
         }
     },[]);
 
-    async function handleDelete(idcandid, photo) 
+    async function handleDelete(idurne) 
 {
     try
     {
-        const res = await fetch(`/api/delcandid/${idcandid}`, {
-            method: "POST",
-            body:JSON.stringify({photo}),
-            cache: "no-store"
+        const res = await fetch(`${process.env.NEXT_PUBLIC_URL_API}/api/urne/${idurne}`, {
+            method: "DELETE",
+            cache: "no-store",
+            credentials: "include"
         });
 
         const data = await res.json();
-
+        console.log(data);
+        
         if (data.connect == false)
         {
             // redirection propre
@@ -43,10 +44,9 @@ export default function AllCandid({ c })
             console.log("Erreur suppression");
             return;
         }
-
         // 🔥 force un nouveau tableau (important)
-        setCa([...data.candidats]);
-
+        setUrne(urne.filter(e=>e.idurne !== idurne));
+        setM(data.message)
     }
     catch(e)
     {
@@ -71,7 +71,7 @@ export default function AllCandid({ c })
                 </Link>
 
                 <h1 className="text-2xl font-extrabold text-slate-900">
-                    Liste des candidats
+                    Liste des urnes
                 </h1>
             </div>
 
@@ -81,18 +81,18 @@ export default function AllCandid({ c })
 
                 {/* SEARCH */}
                 <div className="px-6 py-4 border-b border-slate-200 flex items-center justify-between">
-                    <h3 className="font-bold text-slate-900">Candidats</h3>
+                    <h3 className="font-bold text-slate-900">urne</h3>
 
-                    <Link href={`/election/${idelec}/candidats/ajout`} className="flex cursor-pointer gap-0.5 bg-blue-600 rounded p-2 border-blue-500">
+                    <Link href={`/election/${idelec}/urnes/add`} className="flex cursor-pointer gap-0.5 bg-blue-600 rounded p-2 border-blue-500">
                         <Plus className="text-white" />
                         <span className="text-white">Ajouter</span>
                     </Link>
 
-                    <input
+                    {/* <input
                         className="px-4 py-2 border rounded-lg text-sm focus:ring-2 focus:ring-primary outline-none"
                         placeholder="Rechercher..."
                         type="text"
-                    />
+                    /> */}
                 </div>
 
 
@@ -102,50 +102,24 @@ export default function AllCandid({ c })
 
                         <thead>
                             <tr className="bg-slate-50">
-                                <th className="px-6 py-4 text-xs font-extrabold uppercase text-slate-500">Photo</th>
-                                <th className="px-6 py-4 text-xs font-extrabold uppercase text-slate-500">Libellé</th>
-                                <th className="px-6 py-4 text-xs font-extrabold uppercase text-slate-500">Description</th>
+                                
+                                <th className="px-6 py-4 text-xs font-extrabold uppercase text-slate-500">Adresse</th>
                                 <th className="px-6 py-4 text-xs font-extrabold uppercase text-slate-500 text-right">Actions</th>
                             </tr>
                         </thead>
 
                         <tbody className="divide-y">
 
-                            {ca.map(cand => (
+                            {urne.map(ur => (
 
-                                <tr key={cand.idcandid} className="hover:bg-slate-50 transition">
+                                <tr key={ur.idurne} className="hover:bg-slate-50 transition">
 
-                                    {/* PHOTO */}
-                                    <td className="px-6 py-6">
-                                        <div className="w-15 h-15 rounded-lg overflow-hidden border flex items-center justify-center bg-slate-100">
-
-                                            {cand.photo ? (
-                                                <img
-                                                    src={`${process.env.NEXT_PUBLIC_URL_API}/candidats/${cand.photo}`}
-                                                    alt="photo candidat"
-                                                    className="w-full h-full object-cover"
-                                                />
-                                            ) : (
-                                                <User size={20} className="text-slate-400"/>
-                                            )}
-
-                                        </div>
-                                    </td>
-
-                                    {/* LIB */}
-                                    <td className="px-6 py-4">
-                                        <div className="font-bold text-slate-900">
-                                            {cand.lib || `Candidat ${cand.numcandid}`}
-                                        </div>
-                                        <div className="text-xs text-slate-400">
-                                            Numero: {cand.numcandid}
-                                        </div>
-                                    </td>
 
                                     {/* DESC */}
                                     <td className="px-6 py-4">
                                         <p className="text-sm text-slate-500 max-w-xs truncate">
-                                            {cand.desc || "Aucune description"}
+                                            {ur.adresse || "Aucune description"}<br/>
+                                            <span className="size-4 text-slate-600">id: {ur.idurne}</span>
                                         </p>
                                     </td>
 
@@ -153,11 +127,11 @@ export default function AllCandid({ c })
                                     <td className="px-6 py-4 text-right">
                                         <div className="flex items-center justify-end gap-2">
 
-                                            <Link href={`/election/${cand.idelec}/candidats/modif/${cand.idcandid}`} className="p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition">
+                                            <Link href={`/election/${ur.idelec}/urnes/modif/${ur.idurne}`} className="p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition">
                                                 <Pencil size={18}/>
                                             </Link >
 
-                                            <button onClick={()=> handleDelete(cand.idcandid,cand.photo)} className="p-2 text-red-600 hover:bg-red-50 rounded-lg transition">
+                                            <button onClick={()=> handleDelete(ur.idurne)} className="p-2 text-red-600 hover:bg-red-50 rounded-lg transition">
                                                 <Trash size={18}/>
                                             </button >
 

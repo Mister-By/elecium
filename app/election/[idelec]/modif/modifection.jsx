@@ -16,7 +16,8 @@ export default function ModifElec({ e })
         desc: e.desc || "",
         ia: e.ia,
         dd: formatDate(e.dd),
-        df: formatDate(e.df)
+        df: formatDate(e.df),
+        type: e.type
     });
 
     function update(field, value) {
@@ -80,6 +81,22 @@ router.push(`/election/${e.idelec}`);
 
                         {/* INFOS */}
                         <div className="space-y-6">
+
+                            <div>
+    <label className="block text-sm font-semibold mb-2">
+        Type d'élection
+    </label>
+
+    <select
+        className="w-full px-4 py-3 rounded-lg border border-slate-300 bg-slate-50"
+        value={data.type}
+        onChange={(e) => update("type", e.target.value)}
+    >
+        <option value="l">En ligne</option>
+        <option value="p">Physique</option>
+        <option value="h">Hybride</option>
+    </select>
+</div>
 
                             <div>
                                 <label className="block text-sm font-semibold mb-2">

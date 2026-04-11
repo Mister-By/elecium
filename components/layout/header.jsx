@@ -31,24 +31,31 @@ export default function Header() {
         <nav className="flex gap-6" aria-label="Navigation principale">
           <a
             className="text-sm font-medium text-slate-600 hover:text-[#135bec] transition-colors"
-            href="#features"
+            href="/"
           >
-            Fonctionnalités
+            Mes invitations
           </a>
           <a
             className="text-sm font-medium text-slate-600 hover:text-[#135bec] transition-colors"
-            href="#pricing"
+            href="/election"
           >
-            Tarifs
+            Gerer Mes Scrutins
           </a>
           <a
             className="text-sm font-medium text-slate-600 hover:text-[#135bec] transition-colors"
-            href="#support"
+            href="/election/add/online"
           >
-            Support
+            Nouvelle Election
           </a>
+          <a
+            className="text-sm font-medium text-slate-600 hover:text-[#135bec] transition-colors"
+            href="/election/add/online"
+          >
+            FAQ
+          </a>
+          
         </nav>
-        <div className="flex gap-3">
+        {/* <div className="flex gap-3">
           <a
             className="flex h-10 items-center justify-center rounded-lg px-4 text-sm font-bold text-slate-700 hover:bg-slate-100 transition-colors"
             href="/login"
@@ -61,7 +68,7 @@ export default function Header() {
           >
             Inscription
           </a>
-        </div>
+        </div> */}
 
         <a
             className="flex h-10 items-center justify-center rounded-lg bg-[#ec4913] px-4 text-sm font-bold text-white shadow-sm hover:bg-[#135bec]/90 transition-colors"
@@ -97,15 +104,30 @@ export default function Header() {
               <X />
             </button>
             <nav className="flex flex-col gap-4">
-              <a href="#features" className="text-slate-700 hover:text-[#135bec]">
-                Fonctionnalités
-              </a>
-              <a href="#pricing" className="text-slate-700 hover:text-[#135bec]">
-                Tarifs
-              </a>
-              <a href="#support" className="text-slate-700 hover:text-[#135bec]">
-                Support
-              </a>
+              <a
+            className="text-sm font-medium text-slate-600 hover:text-[#135bec] transition-colors"
+            href="/"
+          >
+            Mes invitations
+          </a>
+          <a
+            className="text-sm font-medium text-slate-600 hover:text-[#135bec] transition-colors"
+            href="/election"
+          >
+            Gerer Mes Scrutins
+          </a>
+          <a
+            className="text-sm font-medium text-slate-600 hover:text-[#135bec] transition-colors"
+            href="/election/add/online"
+          >
+            Nouvelle Election
+          </a>
+          <a
+            className="text-sm font-medium text-slate-600 hover:text-[#135bec] transition-colors"
+            href="/election/add/online"
+          >
+            FAQ
+          </a>
             </nav>
             <div className="flex flex-col gap-3 mt-auto">
               <a

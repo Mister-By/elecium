@@ -300,7 +300,8 @@ Enrôler
 
 </Link >)}
 
-<Link href={`/election/${idelec}/`} className="flex items-center gap-4 p-4 rounded-xl bg-white border border-slate-200 hover:border-primary hover:shadow-md transition-all group">
+<button onClick={()=>fetch(`${process.env.NEXT_PUBLIC_URL_API}/api/election/listcand/${idelec}`,{credentials:"include", method: "GET"})} 
+    className="flex items-center gap-4 p-4 rounded-xl bg-white border border-slate-200 hover:border-primary hover:shadow-md transition-all group">
 
 <div className="rounded-full bg-blue-50 p-3 group-hover:bg-primary group-hover:text-white transition-colors text-primary">
 
@@ -312,7 +313,7 @@ Enrôler
 Liste Electoral
 </span>
 
-</Link >
+</button >
 
 {["Hybride", "Physique"].includes(data.type) && (<Link href={`/election/${idelec}/urnes/`} className="flex items-center gap-4 p-4 rounded-xl bg-white border border-slate-200 hover:border-primary hover:shadow-md transition-all group">
 

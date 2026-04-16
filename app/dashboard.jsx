@@ -10,15 +10,18 @@ CalendarX,
 CheckCircle,
 Pencil,
 Plus,
-Sparkles
+Sparkles,
+X
 } from "lucide-react";
 import Link from "next/link";
+import { QRCodeCanvas } from "qrcode.react";
 
-export default function AllElectionClient({ elections })
+export default function AllElectionClient({ elections, iduser })
 {console.log(elections);
 
-
+const [vis, setVis] = useState(false);
 const [filter, setFilter] = useState("Toutes");
+
 
 const filtered = elections.filter(e =>
 {
@@ -82,6 +85,15 @@ Mes Invitations Electorales
 Ici {filtered.length == 0 ? "seront":"sont"} affichés les scrutins auquels vous êtes convié
 </p>
 </div>
+<button
+  onClick={() => setVis(true)}
+  className="px-4 py-2 rounded-lg font-semibold text-white 
+             bg-blue-500 hover:bg-blue-600 
+             shadow-md transition-colors duration-200"
+>
+  Voir code QR
+</button>
+
 
 <div className="flex items-center gap-2 bg-white p-1 rounded-lg border border-slate-200 shadow-sm">
 
@@ -103,6 +115,24 @@ ${filter===s
 
 </div>
 </div>
+{vis && (
+  <div className="fixed inset-0 flex items-center justify-center bg-black/50 z-40">
+    <div className="bg-white p-6 rounded-lg shadow-lg relative">
+      <h2 className="text-lg font-bold mb-4">Votre Code QR</h2>
+
+      {/* QR basé sur iduser */}
+      <QRCodeCanvas value={`${iduser}`} size={200} />
+
+      <button
+        onClick={() => setVis(false)}
+        className="absolute top-2 right-2 p-2 rounded-full bg-slate-100 hover:bg-slate-200"
+        aria-label="Fermer"
+      >
+        <X />
+      </button>
+    </div>
+  </div>
+)}
 
 
 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

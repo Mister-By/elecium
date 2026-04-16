@@ -25,7 +25,7 @@ export default async function Home() {
             return <LandingPage />;
 
         if(data.error == false)
-            return <DashBoard elections={data.elections} />
+            return <DashBoard elections={data.elections} iduser={data.iduser} />
         
         
         return <DashBoard elections={data.elections} />

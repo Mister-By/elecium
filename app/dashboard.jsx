@@ -48,7 +48,7 @@ button: "bg-primary hover:bg-blue-700",
 bottom:"from-primary via-blue-400 to-primary"
 };
 
-if(status === "Planifiée")
+if(status === "Planifié")
 return {
 border:"border-amber-500",
 badge:"bg-amber-100 text-amber-700",

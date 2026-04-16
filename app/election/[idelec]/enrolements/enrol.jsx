@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-import { QrCode, TableOfContents } from "lucide-react";
+import { QrCode, SwitchCamera, TableOfContents } from "lucide-react";
 import { useParams } from "next/navigation";
 import { Scanner } from "@yudiel/react-qr-scanner";
 
@@ -18,6 +18,7 @@ export default function Enrole({ u, ia })
   const [selectedUser, setSelectedUser] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const [message, setMessage] = useState("");
+  const [face, setFace] = useState("environment");
 
   const videoRef = useRef(null);
   const canvasRef = useRef(null);
@@ -171,7 +172,7 @@ export default function Enrole({ u, ia })
   {
     if (showModal && ia)
     {
-      navigator.mediaDevices.getUserMedia({ video: {facingMode: "environment"} })
+      navigator.mediaDevices.getUserMedia({ video: {facingMode: face} })
         .then(stream =>
         {
           if (videoRef.current)
@@ -352,10 +353,13 @@ export default function Enrole({ u, ia })
           {showModal && (
             <div className="fixed inset-0 bg-black/50 flex items-center justify-center">
               <div className="bg-white p-6 rounded-xl w-[400px] flex flex-col gap-4">
-
+              <div className="flex gap-10 items-center">
                 <h2 className="text-xl font-bold">
                   Enrôlement biométrique
                 </h2>
+
+                <button onClick={()=>{setFace(face=="environment"? "user":"environment")}}><SwitchCamera/></button>
+                </div>
 
                 <p>Utilisateur: {selectedUser?.nom}</p>
 

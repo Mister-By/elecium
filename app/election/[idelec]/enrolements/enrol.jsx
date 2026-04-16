@@ -168,21 +168,22 @@ export default function Enrole({ u, ia })
   // =========================
   // CAMERA INIT
   // =========================
-  useEffect(() =>
-  {
-    if (showModal && ia)
-    {
-      navigator.mediaDevices.getUserMedia({ video: {facingMode: face} })
-        .then(stream =>
-        {
-          if (videoRef.current)
-            videoRef.current.srcObject = stream;
-        });
-    }
+  useEffect(() => {
+  if (showModal && ia) {
+    stopCamera(); // 🔥 très important
 
-    return () => stopCamera();
+    navigator.mediaDevices.getUserMedia({
+      video: { facingMode: face }
+    })
+    .then(stream => {
+      if (videoRef.current)
+        videoRef.current.srcObject = stream;
+    });
+  }
 
-  }, [showModal]);
+  return () => stopCamera();
+
+}, [showModal, face]); 
 
   // =========================
   // STOP CAMERA SI CHANGE MODE

@@ -85,7 +85,7 @@ Ici {filtered.length == 0 ? "seront":"sont"} affichés les scrutins auquels vous
 
 <div className="flex items-center gap-2 bg-white p-1 rounded-lg border border-slate-200 shadow-sm">
 
-{["Toutes","En cours","Terminée","Planifiée"].map(s => (
+{["Toutes","En cours","Terminée","Planifié"].map(s => (
 
 <button
 key={s}

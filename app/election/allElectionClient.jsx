@@ -243,7 +243,7 @@ e.createur
 
 
 <div className="fixed bottom-8 right-8 z-50">
-<button className="group relative flex items-center justify-center size-14 bg-primary text-white rounded-full shadow-lg shadow-primary/40 hover:bg-blue-600 hover:scale-105 transition-all duration-300">
+<Link href={"/election/add/online"} className="group relative flex items-center justify-center size-14 bg-primary text-white rounded-full shadow-lg shadow-primary/40 hover:bg-blue-600 hover:scale-105 transition-all duration-300">
 
 <Plus/>
 
@@ -251,7 +251,7 @@ e.createur
 Créer une nouvelle
 </span>
 
-</button>
+</Link>
 </div>
 
 </div>

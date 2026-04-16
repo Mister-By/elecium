@@ -24,6 +24,36 @@ import { io } from "socket.io-client";
 
 export default function ElectionClient({ data })
 {
+    async function handlePrint(e)
+    {
+    e.preventDefault();
+    try {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_URL_API}/api/election/listcand/${idelec}`, {
+            credentials: "include",
+            method: "GET"
+        });
+
+        if (!res.ok) throw new Error("Erreur serveur");
+
+        // Convertir la réponse en blob PDF
+        const blob = await res.blob();
+
+        // Créer un lien temporaire et forcer le téléchargement
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = "candidats.pdf";
+        a.click();
+
+        // Nettoyer
+        window.URL.revokeObjectURL(url);
+
+    } catch (err) {
+        console.error("Erreur téléchargement PDF :", err);
+    }
+}
+    
+
     console.log(data);
     const [nbr_votant, setN] = useState(data.nbr_votant);  
     const [valid, setVal] = useState(data.valid);
@@ -300,7 +330,7 @@ Enrôler
 
 </Link >)}
 
-<button onClick={()=>fetch(`${process.env.NEXT_PUBLIC_URL_API}/api/election/listcand/${idelec}`,{credentials:"include", method: "GET"})} 
+<button onClick={(e)=> handlePrint(e) } 
     className="flex items-center gap-4 p-4 rounded-xl bg-white border border-slate-200 hover:border-primary hover:shadow-md transition-all group">
 
 <div className="rounded-full bg-blue-50 p-3 group-hover:bg-primary group-hover:text-white transition-colors text-primary">

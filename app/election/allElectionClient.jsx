@@ -51,8 +51,8 @@ if(status === "Planifié")
 return {
 border:"border-amber-500",
 badge:"bg-amber-100 text-amber-700",
-button:"bg-slate-900 hover:bg-slate-800",
-bottom:"from-amber-500 via-orange-400 to-amber-500"
+button:"bg-primary hover:bg-blue-400",
+bottom:"from-primary via-blue-200 to-primary"
 };
 
 return {

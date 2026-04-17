@@ -163,6 +163,31 @@ async function handleValidate()
     }    
 }
 
+async function handleTermine() 
+{
+    if(confirm("Voulez vous Terminer l'election ?"))
+    {
+        const rep = await fetch(`${process.env.NEXT_PUBLIC_URL_API}/api/election/close/${idelec}`,{
+            method: "POST",
+            credentials: "include",
+            headers:{
+                "content-type": "application/json"
+            }
+        });
+        const data = await rep.json();
+        if(data.error==true)
+        {
+            alert(data.message);
+            return;
+        }
+        else
+        {
+            setMessage(data.message);
+            return;
+        }
+    }    
+}
+
 const participation =
 data.nbr_votant === 0
 ? 0
@@ -252,6 +277,15 @@ className={`px-1 py-2.5 font-bold rounded-lg shadow-md transition-colors flex it
 onClick={handleValidate}
 >
 <span>Valider liste electoral</span>
+</button>}
+
+{data.createur && data.termine == false && nbr_votant == nbr_vote  && <button
+className={`px-1 py-2.5 font-bold rounded-lg shadow-md transition-colors flex items-center justify-center gap-2 border-primary 
+    bg-green-200 text-green-600 text-xs bg-green hover:bg-green-100 from-primary via-white to-primary
+`}
+onClick={handleTermine}
+>
+<span>Terminer Election</span>
 </button>}
 
 <span className="text-slate-500 text-sm">

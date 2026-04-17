@@ -240,7 +240,7 @@ Retour au tableau de bord
         <Pencil/>
     </Link>)}
 
-    {["Planifié", "Terminée"].includes(data.status) && nbr_vote==0 &(<Link href={""} className="mt-2 ml-4 w-30 shadow-black shadow-md text-red-300 cursor-pointer flex gap-1 px-2 py-2 border rounded-2xl">
+    {["Planifié", "Terminée"].includes(data.status) && nbr_vote==0 && (<Link href={""} className="mt-2 ml-4 w-30 shadow-black shadow-md text-red-300 cursor-pointer flex gap-1 px-2 py-2 border rounded-2xl">
         <span>Supprimer</span>
         <Trash/>
     </Link>)}

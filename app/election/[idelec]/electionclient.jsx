@@ -21,6 +21,7 @@ VoteIcon
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import { io } from "socket.io-client";
+import Resultats from "../../../components/layout/resultat";
 
 export default function ElectionClient({ data })
 {
@@ -300,7 +301,7 @@ Début : {data.dd}
 
 </div>
 
-
+{data.resultats && (<Resultats resultats={data.resultats} />)}
 
 <div className="mb-10">
 

@@ -4,6 +4,7 @@ import ModalError from '../../../components/layout/modalerror';
 import LoginClient from '../../login/login';
 import Vivacite from './vivacite';
 import VoteClient from './voteclient';
+import Resultats from '../../../components/layout/resultat';
 
 export default async function Vote({params})
 {
@@ -45,6 +46,9 @@ export default async function Vote({params})
                 )}
                 {data.error == false && data.election.ia == false &&(
                     <VoteClient formData={new FormData()} election={data.election} />
+                )}
+                {data.error == false && data.election.resultats !== null &&(
+                    <Resultats  resultats={data.election.resultats} />
                 )}
                 </div>
                 

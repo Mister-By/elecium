@@ -15,6 +15,9 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "elecium",
   description: "Application de vote electronique securisé utilisant la blockchain, l'IA et l'IOT",
+  icons:{
+    icon: "/logo.png"
+  }
 };
 
 export default function RootLayout({

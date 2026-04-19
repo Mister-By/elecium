@@ -282,47 +282,18 @@ export default function LandingPage()
         <div className="col-span-2 lg:col-span-2 flex flex-col gap-4">
         <div className="flex items-center gap-2 text-slate-900">
         <div className="size-6 text-[#135bec]">
-        <svg fill="currentColor" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
-        <path d="M24 4C25.7818 14.2173 33.7827 22.2182 44 24C33.7827 25.7818 25.7818 33.7827 24 44C22.2182 33.7827 14.2173 25.7818 4 24C14.2173 22.2182 22.2182 14.2173 24 4Z"></path>
-        </svg>
         </div>
-        <span className="text-xl font-bold">Elecium</span>
+        <span className="text-xl text-primary font-bold">Elecium</span>
         </div>
         <p className="text-sm text-slate-500 max-w-xs">
                                 Solutions de vote électronique sécurisées, transparentes et auditables pour le monde moderne. Renforcer la démocratie grâce à la technologie.
                             </p>
         </div>
-        <div className="flex flex-col gap-3">
-        <h4 className="font-bold text-slate-900">Produit</h4>
-        <a className="text-sm text-slate-600 hover:text-[#135bec]" href="#">Fonctionnalités</a>
-        <a className="text-sm text-slate-600 hover:text-[#135bec]" href="#">Sécurité</a>
-        <a className="text-sm text-slate-600 hover:text-[#135bec]" href="#">Tarifs</a>
-        <a className="text-sm text-slate-600 hover:text-[#135bec]" href="#">Études de cas</a>
-        </div>
-        <div className="flex flex-col gap-3">
-        <h4 className="font-bold text-slate-900">Ressources</h4>
-        <a className="text-sm text-slate-600 hover:text-[#135bec]" href="#">Documentation</a>
-        <a className="text-sm text-slate-600 hover:text-[#135bec]" href="#">Référence API</a>
-        <a className="text-sm text-slate-600 hover:text-[#135bec]" href="#">Blog</a>
-        <a className="text-sm text-slate-600 hover:text-[#135bec]" href="#">Centre d'aide</a>
-        </div>
-        <div className="flex flex-col gap-3">
-        <h4 className="font-bold text-slate-900">Entreprise</h4>
-        <a className="text-sm text-slate-600 hover:text-[#135bec]" href="#">À propos</a>
-        <a className="text-sm text-slate-600 hover:text-[#135bec]" href="#">Carrières</a>
-        <a className="text-sm text-slate-600 hover:text-[#135bec]" href="#">Légal</a>
-        <a className="text-sm text-slate-600 hover:text-[#135bec]" href="#">Contact</a>
-        </div>
         </div>
         <div className="flex flex-col items-center justify-between border-t border-slate-100 pt-8 md:flex-row gap-4">
-        <p className="text-sm text-slate-400">© 2023 Elecium Inc. Tous droits réservés.</p>
+        <p className="text-sm text-slate-400">© {new Date().getFullYear()} Elecium. Tous droits réservés.</p>
         <div className="flex gap-6">
-        <a className="text-slate-400 hover:text-[#135bec]" href="#">
-        <span className="sr-only">Twitter</span>
-        <svg aria-hidden="true" className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
-        <path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84"></path>
-        </svg>
-        </a>
+        
         <a className="text-slate-400 hover:text-[#135bec]" href="#">
         <span className="sr-only">GitHub</span>
         <svg aria-hidden="true" className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">

@@ -13,11 +13,11 @@ export default function HeaderLanding() {
       role="banner"
     >
       {/* Logo + titre optimisé SEO */}
-      <div className="flex items-center gap-2 text-slate-900">
+      <div className="flex items-center w-40">
         <Logo />
-        <h1 className="text-xl font-bold leading-tight tracking-tight text-slate-900">
-          Elecium
-        </h1>
+        <div className="text-xl font-bold leading-tight tracking-tight text-primary">
+          lecium
+        </div>
       </div>
 
       {/* Navigation desktop */}
@@ -66,14 +66,12 @@ export default function HeaderLanding() {
             </button>
             <nav className="flex flex-col gap-4">
               <a href="#features" className="text-slate-700 hover:text-[#135bec]">
-                Fonctionnalités
+                Audits
               </a>
               <a href="#pricing" className="text-slate-700 hover:text-[#135bec]">
                 Tarifs
               </a>
-              <a href="#support" className="text-slate-700 hover:text-[#135bec]">
-                Support
-              </a>
+              
             </nav>
             <div className="flex flex-col gap-3 mt-auto">
               <a

@@ -19,10 +19,10 @@ export default function Header() {
       role="banner"
     >
       {/* Logo + titre optimisé SEO */}
-      <div className="flex items-center gap-2 text-slate-900">
+      <div className="flex items-center text-slate-900">
         <Logo />
         <h1 className="text-xl font-bold leading-tight tracking-tight text-slate-900">
-          Elecium
+          lecium
         </h1>
       </div>
 

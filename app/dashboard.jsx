@@ -15,6 +15,7 @@ X
 } from "lucide-react";
 import Link from "next/link";
 import { QRCodeCanvas } from "qrcode.react";
+import Image from "next/image";
 
 export default function AllElectionClient({ elections, iduser })
 {console.log(elections);
@@ -134,8 +135,12 @@ ${filter===s
   </div>
 )}
 
+{filtered.length == 0 &&(<div className="p-2 rounded-sm w-full flex justify-center items-center flex-col">
+  <h3 className="text-lg font-semibold text-blue-400 text-center font-mono">Vous N'avez Aucune Invitation Electorale Pour Le Moment</h3>
+  <Image src={"/vote.apng"} alt="APNG pour pas d'invitation" width={400} height={400} />
+</div>)}
 
-<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+{filtered.length >0 && <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
 
 {filtered.map(e =>
 {
@@ -263,7 +268,7 @@ e.createur
 );
 })}
 
-</div>
+</div>}
 
 </main>
 

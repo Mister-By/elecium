@@ -280,7 +280,7 @@ onClick={handleValidate}
 <span>Valider liste electoral</span>
 </button>}
 
-{data.createur && data.termine == false && nbr_votant == nbr_vote  && <button
+{data.createur && data.termine == false && nbr_votant == nbr_vote && nbr_votant >0  && <button
 className={`px-1 py-2.5 font-bold rounded-lg shadow-md transition-colors flex items-center justify-center gap-2 border-primary 
     bg-green-200 text-green-600 text-xs bg-green hover:bg-green-100 from-primary via-white to-primary
 `}

@@ -27,8 +27,8 @@ export default function LandingPage()
         <Link href={"/register"} className="flex h-12 min-w-[140px] items-center justify-center rounded-lg bg-[#135bec] px-6 text-base font-bold text-white shadow-md hover:bg-[#135bec]/90 transition-transform hover:scale-[1.02]">
                                     Commencer
                                 </Link>
-        <Link href={"/"} className="flex h-12 min-w-[140px] items-center justify-center rounded-lg bg-slate-100 px-6 text-base font-bold text-slate-900 hover:bg-slate-200 transition-transform hover:scale-[1.02]">
-                                    En savoir plus
+        <Link href={"/login"} className="flex h-12 min-w-[140px] items-center justify-center rounded-lg bg-slate-100 px-6 text-base font-bold text-slate-900 hover:bg-slate-200 transition-transform hover:scale-[1.02]">
+                                    Continuer
                                 </Link>
         </div>
         </div>

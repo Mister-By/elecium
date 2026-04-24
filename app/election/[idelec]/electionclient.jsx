@@ -19,7 +19,7 @@ ListCheck,
 VoteIcon
 } from "lucide-react";
 import Link from "next/link";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import { io } from "socket.io-client";
 import Resultats from "../../../components/layout/resultat";
 
@@ -208,7 +208,7 @@ async function handleDel()
         }
         else
         {
-            setMessage(data.message);
+            useRouter().push("/election");
             return;
         }
     }    

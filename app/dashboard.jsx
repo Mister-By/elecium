@@ -244,15 +244,15 @@ className={` w-full py-2.5 font-bold rounded-lg shadow-md transition-colors flex
 </>)
 }
 
-{e.status ==="Planifié" && e.ia == true (
+{e.status ==="Planifié" && e.ia == true && (
 
 <button>Tester Reconnaissance Faciale</button>
 )
 }
 
-{e.status ==="Planifié" && e.ia == false (
+{e.status ==="Planifié" && e.ia == false && (
 
-<button>Pas Encore Commencée</button>
+<span>Pas Encore Commencée</span>
 )
 }
 

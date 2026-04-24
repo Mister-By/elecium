@@ -234,28 +234,39 @@ Fin
 
 
 <button
-className={`${e.valid? "":""} w-full py-2.5 font-bold rounded-lg shadow-md transition-colors flex items-center justify-center gap-2 ${style.button}`}
+className={` w-full py-2.5 font-bold rounded-lg shadow-md transition-colors flex items-center justify-center gap-2 ${style.button}`}
 >
 
-{e.status==="Terminée"
-?
+{e.status==="Terminée" &&(
 <>
 <span>Résultats</span>
 <BarChart/>
-</>
-:
-e.createur
-?
-<>
-<span>Gérer le scrutin</span>
-<Pencil/>
-</>
-:
+</>)
+}
+
+{e.status ==="Planifié" && e.ia == true (
+
+<button>Tester Reconnaissance Faciale</button>
+)
+}
+
+{e.status ==="Planifié" && e.ia == false (
+
+<button>Pas Encore Commencée</button>
+)
+}
+
+{e.status ==="En cours" && (
+
 <>
 <span className={"text-white"} >Effectuer le vote</span>
 <ArrowRight className="text-white"/>
 </>
+)
 }
+
+
+
 
 </button>
 

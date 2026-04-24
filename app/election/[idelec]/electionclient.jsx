@@ -189,6 +189,31 @@ async function handleTermine()
     }    
 }
 
+async function handleDel() 
+{
+    if(confirm("Voulez vous Supprimer l'election ?"))
+    {
+        const rep = await fetch(`${process.env.NEXT_PUBLIC_URL_API}/api/election/${idelec}`,{
+            method: "DELETE",
+            credentials: "include",
+            headers:{
+                "content-type": "application/json"
+            }
+        });
+        const data = await rep.json();
+        if(data.error==true)
+        {
+            alert(data.message);
+            return;
+        }
+        else
+        {
+            setMessage(data.message);
+            return;
+        }
+    }    
+}
+
 const participation =
 data.nbr_votant === 0
 ? 0
@@ -241,10 +266,10 @@ Retour au tableau de bord
         <Pencil/>
     </Link>)}
 
-    {["Planifié", "Terminée"].includes(data.status) && nbr_vote==0 && (<Link href={""} className="mt-2 ml-4 w-30 shadow-black shadow-md text-red-300 cursor-pointer flex gap-1 px-2 py-2 border rounded-2xl">
+    {["Planifié", "Terminée"].includes(data.status) && nbr_vote==0 && (<button onClick={handleDel} className="mt-2 ml-4 w-30 shadow-black shadow-md text-red-300 cursor-pointer flex gap-1 px-2 py-2 border rounded-2xl">
         <span>Supprimer</span>
         <Trash/>
-    </Link>)}
+    </button>)}
 </div>
 
 <p className="text-slate-600 mt-2 text-base">

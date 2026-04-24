@@ -25,6 +25,7 @@ import Resultats from "../../../components/layout/resultat";
 
 export default function ElectionClient({ data })
 {
+    const router = useRouter();
     async function handlePrint(e)
     {
     e.preventDefault();
@@ -208,8 +209,7 @@ async function handleDel()
         }
         else
         {
-            useRouter().push("/election");
-            return;
+            router.push("/election");
         }
     }    
 }

@@ -116,9 +116,17 @@ export default function Audit({ data = [] }) {
                             {/* Tu écriras ta commande ici */}
                             <div className="font-mono text-sm min-h-[60px] whitespace-pre-wrap break-all">
                                 {`curl -s -X POST https://rpc.elecium.online \
-                                -H 'Content-Type: application/json' \
-                                -d '{"id":1,"jsonrpc":"2.0","method":"chain_getBlock","params":["${current.block_hash}"]}' \
-                                | python3 -m json.tool`}
+                                    -H 'Content-Type: application/json' \
+                                    -d '{"id":1,"jsonrpc":"2.0","method":"chain_getBlock","params":["${current.block_hash}"]}' \
+                                    | python3 -c "
+                                    import sys, json, hashlib
+                                    data = json.load(sys.stdin)
+                                    extrinsics = data['result']['block']['extrinsics']
+                                    for i, ex in enumerate(extrinsics):
+                                        raw = bytes.fromhex(ex[2:])
+                                        h = hashlib.blake2b(raw, digest_size=32).digest()
+                                        print(f'Extrinsic [{i}]: 0x{h.hex()}')
+                                    "`}
                             </div>
 
                             <button

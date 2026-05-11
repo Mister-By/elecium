@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 import { cookies } from 'next/headers';
 import LoginClient from '../login/login';
 import AllElectionClient from './allElectionClient';

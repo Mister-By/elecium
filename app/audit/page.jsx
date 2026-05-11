@@ -2,12 +2,14 @@ import LandingPage from '@/components/layout/landingPage';
 import Header from '@/components/layout/header';
 import Audit from './auditform';
 
-export default async function Register()
+export default async function AuditPage()
 {
     try
     {
         const rep = await fetch(`${process.env.NEXT_PUBLIC_URL_API}/api/allMail`);
         const data = await rep.json();
+        console.log(data);
+        
         return (
             <main>
                 <Header/>

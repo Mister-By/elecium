@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Logo from "@/components/ui/logo";
 import { LogOut, Menu, X } from "lucide-react";
+import Link from "next/link";
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
@@ -19,12 +20,12 @@ export default function Header() {
       role="banner"
     >
       {/* Logo + titre optimisé SEO */}
-      <div className="flex items-center">
+      <Link href={`/`} className="flex items-center">
         <Logo />
         <h1 className="text-xl font-bold leading-tight tracking-tight text-primary">
           lecium
         </h1>
-      </div>
+      </Link>
 
       {/* Navigation desktop */}
       <div className="hidden md:flex flex-1 justify-end gap-8 items-center">

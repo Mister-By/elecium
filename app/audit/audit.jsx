@@ -118,12 +118,12 @@ export default function Audit({ data = [] }) {
                                 {`curl -s -X POST https://rpc.elecium.online -H 'Content-Type: application/json' -d '{"id":1,"jsonrpc":"2.0","method":"chain_getBlock","params":["${current.block_hash}"]}' | python3 -c "import sys,json,hashlib;data=json.load(sys.stdin);[print(f'Extrinsic [{i}]: 0x'+hashlib.blake2b(bytes.fromhex(ex[2:]),digest_size=32).hexdigest()) for i,ex in enumerate(data['result']['block']['extrinsics'])]"`}
                             </div>
 
-                            <button
+                            {/* <button
                                 onClick={copyCommand}
                                 className="mt-4 px-4 py-2 rounded-xl bg-white text-slate-900 text-sm font-medium hover:opacity-90 transition"
                             >
                                 Copier la commande
-                            </button>
+                            </button> */}
                         </div>
                     </div>
 

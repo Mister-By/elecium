@@ -117,7 +117,7 @@ export default function Audit({ data = [] }) {
                             <div className="font-mono text-sm min-h-[60px] whitespace-pre-wrap break-all">
                                 {`curl -s -X POST https://rpc.elecium.online \
                                 -H 'Content-Type: application/json' \
-                                -d '{"id":1,"jsonrpc":"2.0","method":"chain_getBlock","params":["0x${current.block_hash}"]}' \
+                                -d '{"id":1,"jsonrpc":"2.0","method":"chain_getBlock","params":["${current.block_hash}"]}' \
                                 | python3 -m json.tool`}
                             </div>
 

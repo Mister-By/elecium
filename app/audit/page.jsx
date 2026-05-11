@@ -24,7 +24,7 @@ export default async function AuditPage()
                 <Header />
 
                 <div className='mt-20'>
-                    <Link href={"/"} className='gap-2 text-xl mb-5 w-full flex mx-auto'><MoveLeft className='mt-1' /> <span>Audit</span></Link>
+                    <Link href={"/"} className='gap-2 text-xl mb-5 w-full flex ml-7'><MoveLeft className='mt-1' /> <span>Audit</span></Link>
                     <AuditForm mails={data.mails} />
                 </div>
             </main>

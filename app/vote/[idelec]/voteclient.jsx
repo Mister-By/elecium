@@ -228,7 +228,7 @@ export default function VoteClient({ formData, election }) {
             <div className="flex items-center gap-4">
               {candidat.photo ? (
                 <img
-                  src={`${process.env.NEXT_PUBLIC_URL_API}/Candidats/${candidat.photo}`}
+                  src={`${process.env.NEXT_PUBLIC_URL_API}/candidats/${candidat.photo}`}
                   className="w-12 h-12 rounded object-cover"
                 />
               ) : (

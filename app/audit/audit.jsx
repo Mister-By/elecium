@@ -115,7 +115,10 @@ export default function Audit({ data = [] }) {
 
                             {/* Tu écriras ta commande ici */}
                             <div className="font-mono text-sm min-h-[60px] whitespace-pre-wrap break-all">
-                                {/* COMMAND */}
+                                {`curl -s -X POST http://localhost:9000 \
+                                -H 'Content-Type: application/json' \
+                                -d '{"id":1,"jsonrpc":"2.0","method":"chain_getBlock","params":["0x${current.block_hash}"]}' \
+                                | python3 -m json.tool`}
                             </div>
 
                             <button

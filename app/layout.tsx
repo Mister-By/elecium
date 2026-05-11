@@ -14,9 +14,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "elecium",
-  icons:{
-    icon: "/logo.png"
-  },
+  icons: "https://elecium.online/logo.png",
 };
 
 export default function RootLayout({
@@ -25,10 +23,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <>
-    <head>
-      <link rel="icon" type="image/x-icon" href="/logo.png"/>
-    </head>
+    
+    
     <html lang="fr">
       <body
         className={`${geistSans.variable} ${geistMono.variable}  antialiased`}
@@ -36,6 +32,6 @@ export default function RootLayout({
         {children}
       </body>
     </html>
-    </>
+    
   );
 }

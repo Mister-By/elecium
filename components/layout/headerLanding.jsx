@@ -25,6 +25,15 @@ export default function HeaderLanding() {
       <div className="hidden md:flex flex-1 justify-end gap-8 items-center">
         
         <div className="flex gap-3">
+          <a href="/audit" className="text-slate-700 hover:text-[#135bec] hidden md:flex">
+                Audits
+              </a>
+              <a
+              className="text-sm font-medium text-slate-600 hover:text-[#135bec] transition-colors hidden md:flex"
+              href="/policy"
+            >
+              Politique de sécurité
+            </a>
           <a
             className="flex h-10 items-center justify-center rounded-lg px-4 text-sm font-bold text-slate-700 hover:bg-slate-100 transition-colors"
             href="/login"
@@ -66,12 +75,15 @@ export default function HeaderLanding() {
               <X />
             </button>
             <nav className="flex flex-col gap-4">
-              <a href="#features" className="text-slate-700 hover:text-[#135bec]">
+              <a href="/audit" className="text-slate-700 hover:text-[#135bec]">
                 Audits
               </a>
-              <a href="#pricing" className="text-slate-700 hover:text-[#135bec]">
-                Tarifs
-              </a>
+              <a
+              className="text-sm font-medium text-slate-600 hover:text-[#135bec] transition-colors"
+              href="/policy"
+            >
+              Politique de sécurité
+            </a>
               
             </nav>
             <div className="flex flex-col gap-3 mt-auto">

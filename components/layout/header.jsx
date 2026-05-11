@@ -50,9 +50,9 @@ export default function Header() {
           </a>
           <a
             className="text-sm font-medium text-slate-600 hover:text-[#135bec] transition-colors"
-            href="/election/add/online"
+            href="/audit"
           >
-            FAQ
+            Audit
           </a>
           
         </nav>

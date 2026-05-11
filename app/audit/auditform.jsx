@@ -3,7 +3,7 @@
 import { useMemo, useState } from "react";
 import Audit from "./audit";
 
-export default function AuditForm({ mails = [] }) {
+export default function AuditForm({ mails }) {
     const [mode, setMode] = useState("online");
 
     const [mail, setMail] = useState("");

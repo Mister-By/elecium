@@ -14,7 +14,7 @@ export default async function AuditPage()
             <main>
                 <Header/>
                 <div className='mt-24'>
-                    <AuditForm mails={data.mails} />
+                    <AuditForm mails={Array.from(data.mails)} />
                 </div>
                 
             </main>

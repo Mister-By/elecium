@@ -13,7 +13,7 @@ export default function Resultats({ resultats = [] }) {
                     : 0;
 
                 const imageUrl = r.photo
-                    ? `${process.env.NEXT_PUBLIC_URL_API}/Candidats/${r.photo}`
+                    ? `${process.env.NEXT_PUBLIC_URL_API}/candidats/${r.photo}`
                     : "https://via.placeholder.com/150";
 
                 return (

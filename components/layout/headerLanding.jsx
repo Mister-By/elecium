@@ -25,11 +25,11 @@ export default function HeaderLanding() {
       <div className="hidden md:flex flex-1 justify-end gap-8 items-center">
         
         <div className="flex gap-3">
-          <a href="/audit" className="text-slate-700 hover:text-[#135bec] hidden md:flex">
+          <a href="/audit" className="text-slate-700 hover:text-[#135bec] hidden md:flex h-10 items-center justify-center">
                 Audits
               </a>
               <a
-              className="text-sm font-medium text-slate-600 hover:text-[#135bec] transition-colors hidden md:flex"
+              className="text-sm font-medium text-slate-600 hover:text-[#135bec] transition-colors hidden md:flex h-10 items-center justify-center"
               href="/policy"
             >
               Politique de sécurité

@@ -124,7 +124,7 @@ export default function AuditForm({ mails }) {
     return (
         <main className="w-full flex justify-center px-4 py-10">
             <div className="w-full max-w-md bg-white border border-slate-200 rounded-2xl shadow-sm p-6">
-
+                <span>Ne Partager Jamais Vos Identifiant Mais uniquement les données d'audits (Après authentification)</span>
                 {/* SWITCH */}
                 <div className="flex mb-6 bg-slate-100 rounded-xl p-1">
                     <button

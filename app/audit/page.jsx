@@ -6,25 +6,29 @@ export default async function AuditPage()
 {
     try
     {
-        const rep = await fetch(`${process.env.NEXT_PUBLIC_URL_API}/api/allMail`);
+        const rep = await fetch(
+            `${process.env.URL_API}/api/allMail`,
+            {
+                cache: "no-store"
+            }
+        );
+
         const data = await rep.json();
-        console.log(data);
-        
+
         return (
             <main>
-                <Header/>
+                <Header />
+
                 <div className='mt-24'>
-                    <AuditForm mails={Array.from(data.mails)} />
+                    <AuditForm mails={data.mails} />
                 </div>
-                
             </main>
-            
         );
     }
     catch(e)
     {
         console.log(e);
-        return <LandingPage/>;
+
+        return <LandingPage />;
     }
-    
 }

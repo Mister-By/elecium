@@ -3,6 +3,7 @@ export const dynamic = "force-dynamic";
 import LandingPage from '@/components/layout/landingPage';
 import Header from '@/components/layout/header';
 import AuditForm from './auditform';
+import {  MoveLeft } from 'lucide-react';
 
 export default async function AuditPage()
 {
@@ -21,7 +22,8 @@ export default async function AuditPage()
             <main>
                 <Header />
 
-                <div className='mt-24'>
+                <div className='mt-20'>
+                    <h1 className='gap-2 text-xl mb-5'><MoveLeft className='mt-1' /> Audit</h1>
                     <AuditForm mails={data.mails} />
                 </div>
             </main>

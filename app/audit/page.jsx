@@ -7,7 +7,7 @@ export default async function AuditPage()
     try
     {
         const rep = await fetch(
-            `${process.env.URL_API}/api/allMail`,
+            `${process.env.NEXT_PUBLIC_URL_API}/api/allMail`,
             {
                 cache: "no-store"
             }

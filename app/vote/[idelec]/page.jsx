@@ -41,10 +41,10 @@ export default async function Vote({params})
                     {data.error == true && (
                     <ModalError message={data.message}/>
                 )}
-                {data.error == false && data.election.ia == true && data.election.termine == false && data.election.status == "En cours"(
+                {data.error == false && data.election.ia == true && data.election.termine == false && data.election.status == "En cours" &&(
                     <Vivacite election={data.election} />
                 )}
-                {data.error == false && data.election.ia == false && data.election.termine == false && data.election.status == "En cours"(
+                {data.error == false && data.election.ia == false && data.election.termine == false && data.election.status == "En cours" &&(
                     <VoteClient formData={new FormData()} election={data.election} />
                 )}
                 {data.error == false && data.election.resultats !== null &&(

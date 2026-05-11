@@ -495,7 +495,7 @@ checked={form.terms}
 onChange={handleChange}
 />
 
-<Link href={"#"} className="text-sm text-slate-600">
+<Link href={"/policy"} className="text-sm text-slate-600">
 J'accepte les <span className="text-blue-500 font-semibold">conditions</span>
 </Link>
 

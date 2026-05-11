@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 import LandingPage from '@/components/layout/landingPage';
 import Header from '@/components/layout/header';
 import AuditForm from './auditform';

@@ -1,6 +1,6 @@
 import LandingPage from '@/components/layout/landingPage';
 import Header from '@/components/layout/header';
-import Audit from './auditform';
+import AuditForm from './auditform';
 
 export default async function AuditPage()
 {

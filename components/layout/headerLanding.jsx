@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Logo from "@/components/ui/logo";
 import { Menu, X } from "lucide-react";
+import Link from "next/link";
 
 export default function HeaderLanding() {
   const [isOpen, setIsOpen] = useState(false);
@@ -13,12 +14,12 @@ export default function HeaderLanding() {
       role="banner"
     >
       {/* Logo + titre optimisé SEO */}
-      <div className="flex items-center w-40">
+      <Link href={`/`} className="flex items-center w-40">
         <Logo />
         <div className="text-xl font-bold leading-tight tracking-tight text-primary">
           lecium
         </div>
-      </div>
+      </Link>
 
       {/* Navigation desktop */}
       <div className="hidden md:flex flex-1 justify-end gap-8 items-center">

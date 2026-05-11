@@ -85,7 +85,7 @@ export default function AuditForm({ mails = [] }) {
             const res = await fetch(
                 `${process.env.NEXT_PUBLIC_URL_API}/api/audit`,
                 {
-                    method: "GET",
+                    method: "POST",
                     headers: {
                         "Content-Type": "application/json",
                     },

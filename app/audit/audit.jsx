@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from "react";
 
-export default function AuditForm({ data = [] }) {
+export default function Audit({ data = [] }) {
 
     const [selected, setSelected] = useState(0);
 

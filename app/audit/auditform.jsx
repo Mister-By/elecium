@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import Audit from "./Audit";
+import Audit from "./audit";
 
 export default function AuditForm({ mails = [] }) {
     const [mode, setMode] = useState("online");
